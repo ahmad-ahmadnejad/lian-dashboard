@@ -7,12 +7,10 @@ const UsersTable = () => {
   const [users, setUsers] = useState([]);
   const [openEditModal, setOpenEditModal] = useState(false);
   const [editedUser, setEditedUser] = useState({
-    // I Must Use Id || UUid for this Section . but i dont have BackEnd And This Project is For Test!
     name: '',
     userName: '',
     email: '',
     phone: '',
-    Id: Math.floor(Math.random() * 100),
   });
 
   // Customize Back-End Data
@@ -78,7 +76,7 @@ const UsersTable = () => {
   const updateUserHandler = () => {
     const prevUsers = [...users];
     const userIndex = prevUsers.findIndex((user) => user.Id === openEditModal);
-    prevUsers[userIndex] = editedUser;
+    prevUsers[userIndex] = { ...editedUser, Id: crypto.randomUUID() };
     setUsers(prevUsers);
     setOpenEditModal(false);
   };
